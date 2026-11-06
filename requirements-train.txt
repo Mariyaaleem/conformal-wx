@@ -1,0 +1,7 @@
+# Only for steps 01-02 (download ERA5 slice, train the forecaster). Includes the analysis requirements.
+-r requirements.txt
+torch
+xarray
+zarr
+gcsfs
+dask

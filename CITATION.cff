@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper (and the Zenodo archive of this release)."
+title: "conformal-wx: code for Distribution-Free Uncertainty Quantification for Weather Forecasting"
+type: software
+authors:
+  - name: "Mariya"
+    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+version: "v1.0.0"
+date-released: "2026-11-XX"          # TODO: date of the tagged release
+license: MIT
+repository-code: "https://github.com/Mariyaaleem/conformal-wx"
+# doi: "10.5281/zenodo.XXXXXXX"      # TODO: add after the Zenodo release exists
+preferred-citation:
+  type: article
+  title: "Distribution-Free Uncertainty Quantification for Weather Forecasting: Conformal Prediction Under Spatiotemporal Dependence"
+  authors:
+    - name: "Mariya"
+  year: 2026
+  # notes: "arXiv:XXXX.XXXXX"        # TODO: add after arXiv posting

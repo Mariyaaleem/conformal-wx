@@ -1,0 +1,16 @@
+# large data: hosted outside git (see data/README.md)
+data/*.npz
+data/*.zarr
+# keep the small skill file and the data README
+!data/README.md
+!data/forecaster_skill.json
+# local backups and scratch
+*_orig.py
+*.bak
+results_iid/
+# python / notebooks / OS
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.DS_Store
