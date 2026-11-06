@@ -5,7 +5,7 @@ Large files are **not** in git. They are hosted at: `(https://doi.org/10.5281/ze
 | file | what | size | needed for |
 |---|---|---|---|
 | `preds.npz` | calibration + test forecasts of the CNN (seed 0, epoch-3 checkpoint): `pred`, `true` (N,8,32,64), `init_time`, `split`, `leads_h`, `lat`, `lon`; 730 calibration + 1,086 test daily 00 UTC inits | 238,269,012 bytes (227 MiB) | steps 03-07 (reproduces every number in the paper) |
-| `era5_64x32.npz` | ERA5 2 m temperature + Z500, 5.625 deg, 6-hourly, 1979-01-01 to 2021-12-31 (62,824 steps) | ~1 GB | steps 02 only (or regenerate with `01_download_era5.py`) |
+| `era5_64x32.npz` | ERA5 2 m temperature + Z500, 5.625 deg, 6-hourly, 1979-01-01 to 2021-12-31 (62,824 steps); **not hosted**, regenerate with `python 01_download_era5.py` (about 1 GB, anonymous access to the WeatherBench 2 bucket) | ~1 GB | step 02 only (retraining) |
 | `forecaster_skill.json` | test RMSE of model / persistence / climatology (in git) | small | paper Table (skill) |
 
 SHA-256 of `preds.npz`: `a7000c2e4dc07da6b4c3517662ce13798619511f5f997e818135dd9b71c543cc`
