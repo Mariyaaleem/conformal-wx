@@ -1,6 +1,7 @@
 # data/
 
-Large files are **not** in git. They are hosted at: `(https://doi.org/10.5281/zenodo.23998807)`.
+Large files are **not** in git. `preds.npz` is hosted at: https://doi.org/10.5281/zenodo.23998807
+The ERA5 slice is not hosted: regenerate it with `01_download_era5.py` (see below).
 
 | file | what | size | needed for |
 |---|---|---|---|
