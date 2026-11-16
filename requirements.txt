@@ -1,4 +1,6 @@
-# Versions used to produce the paper's tables (Python 3.13)
+# Analysis only: steps 00, 03-07 and decompose.py, feasible.py, paired_hres.py (regenerate every table and figure from
+# data/preds.npz and data/preds_hres.npz). No GPU needed.
+# Pinned to the versions of the release runs (Colab CPU, Python 3.13.18, 2026-11-16).
 numpy==2.4.6
 scipy==1.16.3
 pandas==2.2.3
