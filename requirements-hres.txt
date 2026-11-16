@@ -1,0 +1,6 @@
+# Only for 08_build_hres_preds.py (rebuilding data/preds_hres.npz from the WeatherBench 2 archive; needs internet).
+# Use together with requirements.txt. Pinned to the versions of the release runs (Colab CPU, Python 3.13.18, 2026-11-16).
+# gcsfs reads the public Google Cloud bucket anonymously; dask is not needed.
+xarray==2025.12.0
+zarr==3.4.2
+gcsfs==2025.12.0
