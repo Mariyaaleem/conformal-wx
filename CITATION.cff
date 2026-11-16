@@ -3,17 +3,44 @@ message: "If you use this code, please cite the paper (and the Zenodo archive of
 title: "conformal-wx: code for Distribution-Free Uncertainty Quantification for Weather Forecasting"
 type: software
 authors:
-  - name: "Mariya"
+  - given-names: "Mariya"
     # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-version: "v1.0.0"
-date-released: "2026-11-XX"          # TODO: date of the tagged release
+version: "v1.1.0"
+date-released: "2026-11-16"
 license: MIT
 repository-code: "https://github.com/Mariyaaleem/conformal-wx"
-# doi: "10.5281/zenodo.XXXXXXX"      # TODO: add after the Zenodo release exists
+doi: "10.5281/zenodo.24262268"
+keywords:
+  - conformal prediction
+  - uncertainty quantification
+  - weather forecasting
+  - spatiotemporal dependence
+  - ERA5
+  - ECMWF HRES
 preferred-citation:
   type: article
   title: "Distribution-Free Uncertainty Quantification for Weather Forecasting: Conformal Prediction Under Spatiotemporal Dependence"
   authors:
-    - name: "Mariya"
+    - given-names: "Mariya"
   year: 2026
   # notes: "arXiv:XXXX.XXXXX"        # TODO: add after arXiv posting
+  # url: "https://arxiv.org/abs/XXXX.XXXXX"
+references:
+  - type: article
+    title: "The ERA5 global reanalysis"
+    authors:
+      - family-names: "Hersbach"
+        given-names: "Hans"
+      - name: "et al."
+    journal: "Quarterly Journal of the Royal Meteorological Society"
+    year: 2020
+    doi: "10.1002/qj.3803"
+  - type: article
+    title: "WeatherBench 2: A benchmark for the next generation of data-driven global weather models"
+    authors:
+      - family-names: "Rasp"
+        given-names: "Stephan"
+      - name: "et al."
+    year: 2024
+    notes: "arXiv:2308.15560"
+    url: "https://arxiv.org/abs/2308.15560"
