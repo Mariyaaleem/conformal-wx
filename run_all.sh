@@ -3,8 +3,15 @@
 #   ./run_all.sh reproduce    # regenerate every table/figure from data/preds.npz   (no GPU, no download)
 #   ./run_all.sh full         # also download ERA5 and retrain the forecaster       (GPU recommended)
 #   ./run_all.sh synthetic    # i.i.d. synthetic sanity check used in the paper's appendix (minutes)
+#   ./run_all.sh dayscale     # day-scale analysis of the CNN forecasts (decompose.py, feasible.py)  (needs data/preds.npz)
+#   ./run_all.sh hres         # ECMWF HRES: build data/preds_hres.npz if missing (internet), benchmark -> results_hres,
+#                             # day-scale analysis, paired comparison. Does NOT call 07 (its reference is CNN-only).
+# Optional: BOOT=<n> sets the bootstrap replicates of decompose.py/feasible.py in dayscale/hres (default 1000).
 set -euo pipefail
 MODE="${1:-reproduce}"
+BOOT="${BOOT:-1000}"
+# run a step and print its wall-clock time (used in the dayscale and hres modes)
+run() { local t0=$SECONDS; "$@"; echo "[run_all] $((SECONDS - t0)) s : $*"; }
 case "$MODE" in
   synthetic)
     python 00_synthetic_demo.py --iid --out data/iid.npz
@@ -26,5 +33,26 @@ case "$MODE" in
     # point estimates must match the shipped reference tables (valid for the released preds.npz only)
     python 07_check_reproduction.py --results results --reference reference
     ;;
-  *) echo "usage: $0 {reproduce|full|synthetic}"; exit 2;;
+  dayscale)
+    [ -f data/preds.npz ] || { echo "data/preds.npz missing (see data/README.md)"; exit 1; }
+    run python decompose.py --npz data/preds.npz --boot "$BOOT" --out results_decomp
+    run python feasible.py  --npz data/preds.npz --boot "$BOOT" --out results_feasible
+    ;;
+  hres)
+    [ -f data/preds.npz ] || { echo "data/preds.npz missing (see data/README.md)"; exit 1; }
+    if [ ! -f data/preds_hres.npz ]; then
+      run python 08_build_hres_preds.py --preds data/preds.npz --out data/preds_hres.npz   # needs internet + requirements-hres.txt
+    fi
+    # benchmark and tables, same steps and order as 'reproduce' (no 07: its reference tables are for the CNN only)
+    run python 03_run_benchmark.py --preds data/preds_hres.npz --out results_hres --alphas 0.1 0.2 0.05
+    run python 06_extra_diagnostics.py --results results_hres --preds data/preds_hres.npz
+    run python 05_bootstrap_tables.py --results results_hres
+    run python 04_make_figures.py --results results_hres --alpha 0.1
+    # day-scale analysis (Table 3 comparison skipped: it applies to the CNN file only)
+    run python decompose.py --npz data/preds_hres.npz --boot "$BOOT" --skip-table3-check --out results_decomp_hres
+    run python feasible.py  --npz data/preds_hres.npz --boot "$BOOT" --save-daily results_feasible_hres/daily.npz --out results_feasible_hres
+    # paired comparison with the benchmark methods (self-checks against results_hres)
+    run python paired_hres.py --npz data/preds_hres.npz --daily results_feasible_hres/daily.npz --results results_hres --boot 1000
+    ;;
+  *) echo "usage: $0 {reproduce|full|synthetic|dayscale|hres}"; exit 2;;
 esac
